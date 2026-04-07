@@ -19,22 +19,51 @@ class SignaturePocApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('TTD / Signature POC'),
-            bottom: const TabBar(
-              tabs: [
-                Tab(text: 'signature'),
-                Tab(text: 'SfSignaturePad'),
-              ],
-            ),
-          ),
-          body: const TabBarView(
+      home: const _PocHome(),
+    );
+  }
+}
+
+class _PocHome extends StatelessWidget {
+  const _PocHome();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('TTD / Signature POC')),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SignaturePocScreen(),
-              SyncfusionPocScreen(),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const SignaturePocScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text('signature'),
+                ),
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const SyncfusionPocScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text('syncfusion_flutter_signaturepad'),
+                ),
+              ),
             ],
           ),
         ),
